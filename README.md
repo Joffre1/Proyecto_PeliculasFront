@@ -1,23 +1,20 @@
-# Películas y Directores:
+# Películas y Directores
 
-### Datos del grupo
-**Integrantes:** 
-Raúl Alejandro Luna Vizcaíno  
-Joffre Steven Verdezoto Tejena  
+## Datos del grupo
+## Integrantes
+Raúl Alejandro Luna Vizcaíno
+Joffre Steven Verdezoto Tejena
+## Carrera
+Ingeniería Informatica
 
-**Carrera:** 
+## Materia
+Desarrollo de aplicaciones web
 
-Ingeniería Informática  
-**Materia:** 
+## Proyecto
+Películas y directores: Cine Mundo
 
-Desarrollo de Aplicaciones Web  
-**Proyecto:** 
-
-Películas y directores  
-**Fecha de entrega:** 
-
-3 de febrero de 2025  
-
+## Fecha de entrega 
+3 de febrero de 2025
 ---
 
 ## Título del Proyecto
