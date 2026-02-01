@@ -1,4 +1,4 @@
-# Películas y Directores
+# Películas y Directores: Cine Mundo
 
 ## Datos del grupo
 ## Integrantes
@@ -6,19 +6,15 @@ Raúl Alejandro Luna Vizcaíno
 Joffre Steven Verdezoto Tejena
 ## Carrera
 Ingeniería Informatica
-
 ## Materia
 Desarrollo de aplicaciones web
-
 ## Proyecto
 Películas y directores: Cine Mundo
-
 ## Fecha de entrega 
 3 de febrero de 2025
----
 
 ## Título del Proyecto
-**Películas (Django + React + OAuth 2.0)**
+**Cine Mundo (Django + React + OAuth 2.0)**
 
 El presente proyecto consiste en el trabajo final de la materia de desarrollo de aplicaciones web, con la finalidad de demostrar los conocimientos adquiridos durante el curso. Se establece una arquitectura desacoplada con un backend en **Django (API REST)** y un frontend en **React**.
 
