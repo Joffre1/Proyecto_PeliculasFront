@@ -6,12 +6,16 @@ Raúl Alejandro Luna Vizcaíno
 Joffre Steven Verdezoto Tejena  
 
 **Carrera:** 
+
 Ingeniería Informática  
 **Materia:** 
+
 Desarrollo de Aplicaciones Web  
 **Proyecto:** 
-Películas y directores: Cine Mundo  
+
+Películas y directores  
 **Fecha de entrega:** 
+
 3 de febrero de 2025  
 
 ---
