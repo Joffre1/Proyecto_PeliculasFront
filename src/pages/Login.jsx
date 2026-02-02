@@ -4,23 +4,23 @@ import { Box, TextField, Button, Typography, InputAdornment } from "@mui/materia
 import { Lock, Person } from "@mui/icons-material";
 
 export default function Login({ setToken }) {
-  // 1. Estados para los campos
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // 2. Función de envío
+
   const handleLogin = async (e) => {
-    if (e) e.preventDefault(); // Evita que la página se recargue
-    
+    if (e) e.preventDefault();
+
     try {
       const data = await login(username, password);
-      
-      // Ajusta 'access_token' según lo que devuelva tu backend (a veces es solo 'access')
+
+
       const token = data.access_token || data.access;
-      
+
       if (token) {
         localStorage.setItem("token", token);
-        setToken(token); // Esto actualiza App.jsx y cierra el modal
+        setToken(token);
       }
     } catch (error) {
       console.error("Error en login:", error);
@@ -33,7 +33,7 @@ export default function Login({ setToken }) {
       <Typography variant="h5" sx={{ textAlign: 'center', mb: 3, fontWeight: 'bold', color: 'primary.main' }}>
         ACCESO ADMINISTRATIVO
       </Typography>
-      
+
       <form onSubmit={handleLogin}>
         <TextField
           fullWidth
@@ -50,7 +50,7 @@ export default function Login({ setToken }) {
             ),
           }}
         />
-        
+
         <TextField
           fullWidth
           label="Contraseña"
@@ -68,10 +68,10 @@ export default function Login({ setToken }) {
           }}
         />
 
-        <Button 
-          fullWidth 
-          variant="contained" 
-          type="submit" 
+        <Button
+          fullWidth
+          variant="contained"
+          type="submit"
           size="large"
           sx={{ mt: 3, py: 1.5, fontWeight: 'bold' }}
         >

@@ -6,7 +6,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    // PRUEBA ESTO: Revisa si en tu login guardaste el token como "token" o como "access_token"
+    
     const token = localStorage.getItem("token") || localStorage.getItem("access_token");
     
     if (token) {

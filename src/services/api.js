@@ -2,16 +2,14 @@ import axios from "axios";
 
 const BASE_URL = "http://127.0.0.1:8000/api";
 
-// Creamos una instancia centralizada
 const api = axios.create({
   baseURL: BASE_URL,
 });
 
-// Interceptor para inyectar el Token automáticamente en TODAS las peticiones
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
-    // CAMBIA 'Bearer' por 'Token' si tu Django no usa JWT
+
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
@@ -20,7 +18,7 @@ api.interceptors.request.use((config) => {
 // ===== DIRECTORES =====
 
 export const createDirector = async (directorData) => {
-  // Usamos FormData por si hay fotos
+
   const response = await api.post("/directores/", directorData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
@@ -39,7 +37,7 @@ export const deleteDirector = async (id) => {
   return response.data;
 };
 
-// ===== PELICULAS =====
+// ===== PELÍCULAS =====
 
 export const createMovie = async (data) => {
   const response = await api.post("/peliculas/", data, {

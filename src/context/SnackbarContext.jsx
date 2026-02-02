@@ -17,7 +17,6 @@ export function SnackbarProvider({ children }) {
     setOpen(true);
   };
 
-  // Alias por compatibilidad con código existente (showSnackbar)
   const showSnackbar = showMessage;
 
   return (

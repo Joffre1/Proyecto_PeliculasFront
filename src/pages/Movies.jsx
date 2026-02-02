@@ -3,19 +3,19 @@ import { Grid, Typography, Card, CardContent, CardMedia, Button, Box, Dialog, Di
 import InfoIcon from '@mui/icons-material/Info';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import StarIcon from '@mui/icons-material/Star'; // Importa el icono de estrella
-import api from "../api/axiosConfig"; // Importa tu config de axios para el PUT
+import StarIcon from '@mui/icons-material/Star';
+import api from "../api/axiosConfig";
 
 const Movies = ({ directores, token, onEdit, onDelete, onAdd, recargar }) => {
   const [openDetalleModal, setOpenDetalleModal] = useState(false);
   const [movieDetalle, setMovieDetalle] = useState(null);
   const todasLasPeliculas = directores.flatMap(d => d.movies || []);
 
-  // Función para guardar el rating en el Back
+
   const handleRatingChange = async (movieId, newValue) => {
     try {
       await api.patch(`peliculas/${movieId}/`, { rating: newValue });
-      recargar(); // Recargamos para ver el cambio reflejado
+      recargar();
     } catch (error) {
       console.error("Error al calificar:", error);
     }
@@ -24,7 +24,7 @@ const Movies = ({ directores, token, onEdit, onDelete, onAdd, recargar }) => {
   return (
     <Box>
       <Typography variant="h3" sx={{ textAlign: 'center', mb: 4, fontWeight: 'bold', color: 'primary.main', textShadow: '0 0 15px #FFD700' }}>🎬 CARTELERA COMPLETA</Typography>
-      
+
       {token && (
         <Box sx={{ textAlign: 'center', mb: 6 }}>
           <Button variant="contained" size="large" onClick={onAdd} sx={{ boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)' }}>+ AÑADIR PELÍCULA</Button>
@@ -38,14 +38,14 @@ const Movies = ({ directores, token, onEdit, onDelete, onAdd, recargar }) => {
               {movie.picture && <CardMedia component="img" height="400" image={`http://127.0.0.1:8000/media/${movie.picture}`} />}
               <CardContent sx={{ textAlign: 'center', bgcolor: 'rgba(13, 20, 40, 0.95)' }}>
                 <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{movie.title}</Typography>
-                
-                {/* --- SECCIÓN DE ESTRELLAS --- */}
+
+
                 <Box sx={{ my: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
                   <Rating
                     name={`rating-${movie.id}`}
                     value={movie.rating || 0}
                     precision={1}
-                    readOnly={!token} // Si no hay login, solo se ven
+                    readOnly={!token}
                     icon={<StarIcon sx={{ color: '#FFD700' }} fontSize="inherit" />}
                     emptyIcon={<StarIcon sx={{ color: 'rgba(255,215,0,0.2)' }} fontSize="inherit" />}
                     onChange={(event, newValue) => handleRatingChange(movie.id, newValue)}
@@ -54,20 +54,19 @@ const Movies = ({ directores, token, onEdit, onDelete, onAdd, recargar }) => {
                     ({movie.rating || 0})
                   </Typography>
                 </Box>
-                {/* ---------------------------- */}
 
                 <Typography variant="body2" color="secondary" sx={{ mb: 2 }}>{movie.year} | {movie.genre}</Typography>
-                
+
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <Button variant="outlined" startIcon={<InfoIcon />} fullWidth onClick={() => { setMovieDetalle(movie); setOpenDetalleModal(true); }}>Ver Detalles</Button>
 
                   {token && (
                     <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
-                      <Button 
+                      <Button
                         variant="contained" color="warning" fullWidth startIcon={<EditIcon />} onClick={() => onEdit(movie)}
                         sx={{ boxShadow: '0 0 10px #ff9800' }}
                       >Editar</Button>
-                      <Button 
+                      <Button
                         variant="contained" color="error" fullWidth startIcon={<DeleteIcon />} onClick={() => onDelete(movie.id)}
                         sx={{ boxShadow: '0 0 10px #f44336' }}
                       >Borrar</Button>
@@ -80,7 +79,7 @@ const Movies = ({ directores, token, onEdit, onDelete, onAdd, recargar }) => {
         ))}
       </Grid>
 
-      {/* El modal de detalle se queda igual... */}
+
       <Dialog open={openDetalleModal} onClose={() => setOpenDetalleModal(false)} fullWidth maxWidth="sm">
         {movieDetalle && (
           <Box sx={{ p: 4, bgcolor: 'background.paper' }}>

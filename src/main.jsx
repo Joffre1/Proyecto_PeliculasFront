@@ -4,14 +4,14 @@ import App from "./App.jsx";
 import { SnackbarProvider } from "./Context/SnackbarContext";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 
-// Creamos un tema moderno estilo "Streaming"
+
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: { main: '#E50914' }, // Rojo Cine/Netflix
+    primary: { main: '#E50914' },
     background: {
-      default: '#141414', // Fondo casi negro
-      paper: '#1f1f1f',   // Tarjetas un poco más claras
+      default: '#141414',
+      paper: '#1f1f1f',
     },
   },
   typography: {
@@ -22,7 +22,7 @@ const darkTheme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline /> {/* Esto resetea los estilos y pone el fondo oscuro */}
+      <CssBaseline />
       <SnackbarProvider>
         <App />
       </SnackbarProvider>

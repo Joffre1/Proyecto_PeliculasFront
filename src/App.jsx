@@ -50,7 +50,7 @@ function App() {
   const [directores, setDirectores] = useState([]);
   const [directorSeleccionado, setDirectorSeleccionado] = useState(null);
   const [movieSeleccionada, setMovieSeleccionada] = useState(null);
-  const [tabActual, setTabActual] = useState("directores"); 
+  const [tabActual, setTabActual] = useState("directores");
   const [openDialog, setOpenDialog] = useState(false);
   const [accionEliminar, setAccionEliminar] = useState(null);
   const { showSnackbar } = useSnackbar();
@@ -97,7 +97,7 @@ function App() {
       <CssBaseline />
       <StarryBackground />
       <div className="stars-container" />
-      
+
       <Box sx={{ flexGrow: 1, minHeight: '100vh', pb: 6 }}>
         <AppBar position="sticky" elevation={0} sx={{ background: 'rgba(5, 10, 24, 0.8)', backdropFilter: 'blur(20px)' }}>
           <Toolbar>
@@ -107,7 +107,7 @@ function App() {
               <Button onClick={() => setTabActual("peliculas")} sx={{ color: tabActual === "peliculas" ? 'primary.main' : 'white' }}>Películas</Button>
             </Box>
             {token ? (
-              <Button color="error" variant="contained" onClick={() => {localStorage.removeItem("token"); setToken(null);}}>Cerrar Seción</Button>
+              <Button color="error" variant="contained" onClick={() => { localStorage.removeItem("token"); setToken(null); }}>Cerrar Seción</Button>
             ) : (
               <Button color="primary" variant="contained" onClick={() => setOpenLoginModal(true)}>Iniciar Sesión</Button>
             )}
@@ -123,7 +123,7 @@ function App() {
 
               {token && (
                 <Box sx={{ textAlign: 'center', mb: 6 }}>
-                  <Button variant="contained" size="large" onClick={() => setOpenDirectorModal(true)} sx={{boxShadow: '0 0 15px #FFD700'}}>+ AÑADIR DIRECTOR</Button>
+                  <Button variant="contained" size="large" onClick={() => setOpenDirectorModal(true)} sx={{ boxShadow: '0 0 15px #FFD700' }}>+ AÑADIR DIRECTOR</Button>
                 </Box>
               )}
 
@@ -132,32 +132,32 @@ function App() {
                   <Grid item xs={12} key={director.id}>
                     <Card sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
                       {director.picture && (
-                        <CardMedia 
-                          component="img" 
-                          sx={{ width: { xs: '100%', md: 450 }, height: { xs: 400, md: 'auto' }, objectFit: 'cover' }} 
-                          image={`http://127.0.0.1:8000/media/${director.picture}`} 
+                        <CardMedia
+                          component="img"
+                          sx={{ width: { xs: '100%', md: 450 }, height: { xs: 400, md: 'auto' }, objectFit: 'cover' }}
+                          image={`http://127.0.0.1:8000/media/${director.picture}`}
                         />
                       )}
                       <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, p: 4 }}>
                         <Typography variant="h3" sx={{ fontWeight: '900', color: 'primary.main', mb: 1 }}>{director.name} {director.last_name}</Typography>
                         <Typography variant="h6" sx={{ color: 'secondary.main', mb: 2 }}>{director.age} AÑOS | {director.birth}</Typography>
                         <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3, lineHeight: 1.7 }}>{director.biography}</Typography>
-                        
+
                         {token && (
                           <Box sx={{ display: 'flex', gap: 2, mb: 4 }}>
-                            <Button 
+                            <Button
                               variant="contained" startIcon={<EditIcon />}
-                              sx={{ bgcolor: '#ff9800', boxShadow: '0 0 10px #ff9800', '&:hover': {bgcolor: '#e68a00'} }} 
+                              sx={{ bgcolor: '#ff9800', boxShadow: '0 0 10px #ff9800', '&:hover': { bgcolor: '#e68a00' } }}
                               onClick={() => { setDirectorSeleccionado(director); setOpenDirectorModal(true); }}
                             >EDITAR PERFIL</Button>
-                            <Button 
+                            <Button
                               variant="contained" color="error" startIcon={<DeleteIcon />}
-                              sx={{ boxShadow: '0 0 10px #f44336' }} 
+                              sx={{ boxShadow: '0 0 10px #f44336' }}
                               onClick={() => confirmarEliminarDirector(director.id)}
                             >BORRAR</Button>
                           </Box>
                         )}
-                        
+
                         <Divider sx={{ my: 3, borderColor: 'rgba(255,215,0,0.2)' }} />
                         <Typography variant="h6" sx={{ color: 'primary.main', mb: 2, fontSize: '1rem' }}>FILMOGRAFÍA:</Typography>
 
@@ -195,9 +195,9 @@ function App() {
               </Grid>
             </Box>
           ) : (
-            <Movies 
-              directores={directores} 
-              token={token} 
+            <Movies
+              directores={directores}
+              token={token}
               onEdit={(m) => { setMovieSeleccionada(m); setOpenMovieModal(true); }}
               onDelete={(id) => confirmarEliminarMovie(id)}
               onAdd={() => setOpenMovieModal(true)}
@@ -207,13 +207,13 @@ function App() {
         </Container>
       </Box>
 
-      {/* MODALES */}
-      <Dialog open={openLoginModal} onClose={() => setOpenLoginModal(false)}><Login setToken={(t) => {setToken(t); setOpenLoginModal(false);}} /></Dialog>
-      <Dialog open={openDirectorModal} onClose={() => {setOpenDirectorModal(false); setDirectorSeleccionado(null);}} fullWidth maxWidth="sm">
-        <Box sx={{ p: 3, bgcolor: 'background.paper' }}><DirectorForm directorSeleccionado={directorSeleccionado} limpiarSeleccion={() => {setOpenDirectorModal(false); setDirectorSeleccionado(null);}} recargar={cargarDirectores} /></Box>
+
+      <Dialog open={openLoginModal} onClose={() => setOpenLoginModal(false)}><Login setToken={(t) => { setToken(t); setOpenLoginModal(false); }} /></Dialog>
+      <Dialog open={openDirectorModal} onClose={() => { setOpenDirectorModal(false); setDirectorSeleccionado(null); }} fullWidth maxWidth="sm">
+        <Box sx={{ p: 3, bgcolor: 'background.paper' }}><DirectorForm directorSeleccionado={directorSeleccionado} limpiarSeleccion={() => { setOpenDirectorModal(false); setDirectorSeleccionado(null); }} recargar={cargarDirectores} /></Box>
       </Dialog>
-      <Dialog open={openMovieModal} onClose={() => {setOpenMovieModal(false); setMovieSeleccionada(null);}} fullWidth maxWidth="md">
-        <Box sx={{ p: 3, bgcolor: 'background.paper' }}><MovieForm movieSeleccionada={movieSeleccionada} limpiarMovie={() => {setOpenMovieModal(false); setMovieSeleccionada(null);}} directores={directores} recargar={cargarDirectores} /></Box>
+      <Dialog open={openMovieModal} onClose={() => { setOpenMovieModal(false); setMovieSeleccionada(null); }} fullWidth maxWidth="md">
+        <Box sx={{ p: 3, bgcolor: 'background.paper' }}><MovieForm movieSeleccionada={movieSeleccionada} limpiarMovie={() => { setOpenMovieModal(false); setMovieSeleccionada(null); }} directores={directores} recargar={cargarDirectores} /></Box>
       </Dialog>
       <ConfirmDialog open={openDialog} title="SISTEMA" message="¿Deseas eliminar este registro?" onClose={() => setOpenDialog(false)} onConfirm={accionEliminar} />
     </ThemeProvider>

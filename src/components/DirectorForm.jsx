@@ -13,9 +13,9 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
     age: "",
     birth: "",
     biography: "",
-    picture: "" // Aquí guardaremos el Base64 si se cambia
+    picture: ""
   });
-  
+
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
         age: directorSeleccionado.age || "",
         birth: directorSeleccionado.birth || "",
         biography: directorSeleccionado.biography || "",
-        picture: "" // No ponemos la URL aquí para no enviarla de vuelta al server
+        picture: ""
       });
       if (directorSeleccionado.picture) {
         setPreview(`http://127.0.0.1:8000/media/${directorSeleccionado.picture}`);
@@ -46,8 +46,8 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Preparamos el objeto limpio
+
+
     const dataToSend = {
       name: formData.name,
       last_name: formData.last_name,
@@ -56,8 +56,7 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
       biography: formData.biography
     };
 
-    // SOLUCIÓN AL ERROR 400: Solo enviamos 'picture' si el usuario cargó una NUEVA
-    // Si formData.picture está vacío, el backend mantendrá la imagen anterior
+
     if (formData.picture && formData.picture.startsWith("data:image")) {
       dataToSend.picture = formData.picture;
     }
@@ -81,13 +80,13 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
       <Typography variant="h5" sx={{ mb: 3, fontWeight: 'bold', color: 'primary.main' }}>
         {directorSeleccionado ? "Editar Director" : "Nuevo Director"}
       </Typography>
-      
+
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth label="Nombre" required
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             InputProps={{ startAdornment: <InputAdornment position="start"><PersonIcon /></InputAdornment> }}
           />
         </Grid>
@@ -95,14 +94,14 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
           <TextField
             fullWidth label="Apellido" required
             value={formData.last_name}
-            onChange={(e) => setFormData({...formData, last_name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
             fullWidth label="Edad" type="number" required
             value={formData.age}
-            onChange={(e) => setFormData({...formData, age: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, age: e.target.value })}
           />
         </Grid>
         <Grid item xs={12} sm={8}>
@@ -110,7 +109,7 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
             fullWidth label="Fecha de Nacimiento" type="date" required
             InputLabelProps={{ shrink: true }}
             value={formData.birth}
-            onChange={(e) => setFormData({...formData, birth: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, birth: e.target.value })}
             InputProps={{ startAdornment: <InputAdornment position="start"><CakeIcon /></InputAdornment> }}
           />
         </Grid>
@@ -118,7 +117,7 @@ export default function DirectorForm({ directorSeleccionado, limpiarSeleccion, r
           <TextField
             fullWidth multiline rows={3} label="Biografía"
             value={formData.biography}
-            onChange={(e) => setFormData({...formData, biography: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, biography: e.target.value })}
           />
         </Grid>
 

@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { createMovie, updateMovie } from "../services/api";
 import { convertirBase64 } from "../utils/base64";
 import { useSnackbar } from "../Context/SnackbarContext";
-import { 
-  TextField, Button, Typography, Box, 
-  MenuItem, InputAdornment, Avatar, Rating, Paper 
+import {
+  TextField, Button, Typography, Box,
+  MenuItem, InputAdornment, Avatar, Rating, Paper
 } from "@mui/material";
 import MovieIcon from '@mui/icons-material/Movie';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
@@ -77,19 +77,18 @@ function MovieForm({ movieSeleccionada, limpiarMovie, directores, recargar }) {
         {movieSeleccionada ? "EDITAR PELÍCULA" : "REGISTRAR PELÍCULA"}
       </Typography>
 
-      <Box sx={{ 
-        display: 'flex', 
-        flexDirection: { xs: 'column', md: 'row' }, 
-        gap: 4, 
-        alignItems: 'stretch' // Obliga a ambas columnas a tener la misma altura
+      <Box sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        gap: 4,
+        alignItems: 'stretch'
       }}>
-        
-        {/* COLUMNA IZQUIERDA: PÓSTER */}
+
         <Box sx={{ width: { xs: '100%', md: '350px' }, flexShrink: 0 }}>
-          <Paper variant="outlined" sx={{ 
-            p: 3, 
-            textAlign: 'center', 
-            bgcolor: 'rgba(255,255,255,0.02)', 
+          <Paper variant="outlined" sx={{
+            p: 3,
+            textAlign: 'center',
+            bgcolor: 'rgba(255,255,255,0.02)',
             border: '1px dashed #FFD700',
             height: '100%',
             display: 'flex',
@@ -102,7 +101,7 @@ function MovieForm({ movieSeleccionada, limpiarMovie, directores, recargar }) {
                 <MovieIcon sx={{ fontSize: 80 }} />
               </Avatar>
             </Box>
-            
+
             <Box>
               <Button variant="contained" component="label" fullWidth startIcon={<PhotoCamera />} sx={{ mb: 2, fontWeight: 'bold' }}>
                 SUBIR PÓSTER
@@ -114,96 +113,96 @@ function MovieForm({ movieSeleccionada, limpiarMovie, directores, recargar }) {
           </Paper>
         </Box>
 
-        {/* COLUMNA DERECHA: CAMPOS (OCUPA TODO EL RESTO) */}
+
         <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 2.5 }}>
-          
-          <TextField 
-            fullWidth label="Título de la Obra" required 
+
+          <TextField
+            fullWidth label="Título de la Obra" required
             value={title} onChange={e => setTitle(e.target.value)}
-            InputProps={{ startAdornment: <InputAdornment position="start"><MovieIcon color="primary"/></InputAdornment> }}
+            InputProps={{ startAdornment: <InputAdornment position="start"><MovieIcon color="primary" /></InputAdornment> }}
           />
 
           <Box sx={{ display: 'flex', gap: 2 }}>
-            <TextField 
-              fullWidth label="Género" required 
+            <TextField
+              fullWidth label="Género" required
               value={genre} onChange={e => setGenre(e.target.value)}
-              InputProps={{ startAdornment: <InputAdornment position="start"><TheaterComedyIcon color="primary"/></InputAdornment> }}
+              InputProps={{ startAdornment: <InputAdornment position="start"><TheaterComedyIcon color="primary" /></InputAdornment> }}
             />
-            <TextField 
-              select fullWidth label="Director a cargo" required 
+            <TextField
+              select fullWidth label="Director a cargo" required
               value={director} onChange={e => setDirector(e.target.value)}
-              InputProps={{ startAdornment: <InputAdornment position="start"><PersonIcon color="primary"/></InputAdornment> }}
+              InputProps={{ startAdornment: <InputAdornment position="start"><PersonIcon color="primary" /></InputAdornment> }}
             >
               {directores.map(d => <MenuItem key={d.id} value={d.id}>{d.name} {d.last_name}</MenuItem>)}
             </TextField>
           </Box>
 
           <Box sx={{ display: 'flex', gap: 2 }}>
-            <TextField 
-              fullWidth label="Duración" type="number" required 
+            <TextField
+              fullWidth label="Duración" type="number" required
               value={duration} onChange={e => setDuration(e.target.value)}
-              InputProps={{ 
-                startAdornment: <InputAdornment position="start"><AccessTimeIcon color="primary"/></InputAdornment>,
+              InputProps={{
+                startAdornment: <InputAdornment position="start"><AccessTimeIcon color="primary" /></InputAdornment>,
                 endAdornment: <InputAdornment position="end">min</InputAdornment>
               }}
             />
-            <TextField 
-              fullWidth label="Año de Lanzamiento" type="number" required 
+            <TextField
+              fullWidth label="Año de Lanzamiento" type="number" required
               value={year} onChange={e => setYear(e.target.value)}
-              InputProps={{ startAdornment: <InputAdornment position="start"><CalendarTodayIcon color="primary"/></InputAdornment> }}
+              InputProps={{ startAdornment: <InputAdornment position="start"><CalendarTodayIcon color="primary" /></InputAdornment> }}
             />
           </Box>
 
-          {/* Sinopsis que se expande para llenar el hueco */}
-          <TextField 
-            fullWidth multiline rows={10} label="Sinopsis detallada" 
-            value={synopsis} onChange={e => setSynopsis(e.target.value)} 
-            sx={{ 
+
+          <TextField
+            fullWidth multiline rows={10} label="Sinopsis detallada"
+            value={synopsis} onChange={e => setSynopsis(e.target.value)}
+            sx={{
               flexGrow: 1,
-              '& .MuiInputBase-root': { height: '100%', alignItems: 'flex-start' } 
+              '& .MuiInputBase-root': { height: '100%', alignItems: 'flex-start' }
             }}
           />
 
-          {/* Botones alineados al fondo de la columna derecha */}
-          <Box sx={{ 
-  display: 'flex', 
-  gap: 3,           // Espacio entre botones ligeramente reducido
-  mt: 'auto', 
-  pt: 2,            // Un pequeño respiro arriba de los botones
-  justifyContent: 'center' // Los alinea a la derecha si no quieres que ocupen todo
-}}>
-  <Button 
-    type="submit" 
-    variant="contained" 
-    size="medium"   // Cambiado de large a medium
-    sx={{ 
-      py: 1,        // Altura moderada (antes estaba en 2 o 0)
-      px: 4,        // Espacio horizontal para que no se vean comprimidos
-      fontWeight: 'bold', 
-      fontSize: '0.9rem', // Texto un poco más pequeño
-      boxShadow: '0 4px 10px rgba(255, 215, 0, 0.2)',
-      minWidth: '150px'   // Asegura un tamaño mínimo decente
-    }}
-  >
-    {movieSeleccionada ? "ACTUALIZAR" : "GUARDAR"}
-  </Button>
-  
-  <Button 
-    variant="outlined" 
-    color="inherit" 
-    size="medium" 
-    onClick={limpiarFormulario}
-    sx={{ 
-      py: 1, 
-      px: 4, 
-      fontWeight: 'bold',
-      fontSize: '0.9rem',
-      minWidth: '150px'
-    }}
-  >
-    CANCELAR
-  </Button>
-</Box>
+
+          <Box sx={{
+            display: 'flex',
+            gap: 3,
+            mt: 'auto',
+            pt: 2,
+            justifyContent: 'center'
+          }}>
+            <Button
+              type="submit"
+              variant="contained"
+              size="medium"
+              sx={{
+                py: 1,
+                px: 4,
+                fontWeight: 'bold',
+                fontSize: '0.9rem',
+                boxShadow: '0 4px 10px rgba(255, 215, 0, 0.2)',
+                minWidth: '150px'
+              }}
+            >
+              {movieSeleccionada ? "ACTUALIZAR" : "GUARDAR"}
+            </Button>
+
+            <Button
+              variant="outlined"
+              color="inherit"
+              size="medium"
+              onClick={limpiarFormulario}
+              sx={{
+                py: 1,
+                px: 4,
+                fontWeight: 'bold',
+                fontSize: '0.9rem',
+                minWidth: '150px'
+              }}
+            >
+              CANCELAR
+            </Button>
+          </Box>
         </Box>
 
       </Box>
