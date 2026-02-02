@@ -74,6 +74,8 @@ Para configurar el entorno de desarrollo, abre la carpeta de tu repositorio en V
     ### 1. Inicialización del proyecto (Vite)
 ```bash
 npm create vite@latest cine-mundo-frontend
+npm install @mui/icons-material
+
 cd cine-mundo-frontend
 
     ### 2. Instalar las dependencias base

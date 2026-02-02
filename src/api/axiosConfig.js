@@ -1,20 +1,23 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8000/api";
+const api = axios.create({
+  baseURL: "http://127.0.0.1:8000/api",
+});
 
-export const createDirector = async (directorData) => {
-
-  const token = localStorage.getItem("token");
-
-  const response = await axios.post(
-    `${BASE_URL}/directores/`,
-    directorData,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+api.interceptors.request.use(
+  (config) => {
+    // PRUEBA ESTO: Revisa si en tu login guardaste el token como "token" o como "access_token"
+    const token = localStorage.getItem("token") || localStorage.getItem("access_token");
+    
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      console.log("✅ Token encontrado y pegado al Header");
+    } else {
+      console.error("❌ ERROR: No hay ningún token en LocalStorage");
     }
-  );
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
-  return response.data;
-};
+export default api;
