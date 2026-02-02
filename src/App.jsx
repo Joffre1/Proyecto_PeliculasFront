@@ -107,7 +107,7 @@ function App() {
               <Button onClick={() => setTabActual("peliculas")} sx={{ color: tabActual === "peliculas" ? 'primary.main' : 'white' }}>Películas</Button>
             </Box>
             {token ? (
-              <Button color="error" variant="contained" onClick={() => { localStorage.removeItem("token"); setToken(null); }}>Cerrar Seción</Button>
+              <Button color="error" variant="contained" onClick={() => { localStorage.removeItem("token"); setToken(null); }}>Cerrar Sesión</Button>
             ) : (
               <Button color="primary" variant="contained" onClick={() => setOpenLoginModal(true)}>Iniciar Sesión</Button>
             )}
