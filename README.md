@@ -2,8 +2,9 @@
 
 ## Datos del grupo
 ## Integrantes
-Raúl Alejandro Luna Vizcaíno
-Joffre Steven Verdezoto Tejena
+- Raúl Alejandro Luna Vizcaíno
+
+- Joffre Steven Verdezoto Tejena
 ## Carrera
 Ingeniería Informatica
 ## Materia
@@ -85,6 +86,7 @@ Autorización centralizada.
     └───utils
            base64.js
     
+```
 
 ## ⚙️ Instalación y Configuración
 
