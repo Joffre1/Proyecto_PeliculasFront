@@ -105,13 +105,13 @@ cd cine-mundo-frontend
 
 ## Comenzar instalación
 
-### 1. Inicialización del proyecto (Vite)
+1. Inicialización del proyecto (Vite)
 ```bash
 npm create vite@latest cine-mundo-frontend
 npm install @mui/icons-material
 ```
 
-### 2. Instalar las dependencias base
+2. Instalar las dependencias base
 
    ```bash
    npm install
