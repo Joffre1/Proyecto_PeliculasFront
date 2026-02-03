@@ -17,66 +17,97 @@ Películas y directores: Cine Mundo
 **Cine Mundo (Django + React + OAuth 2.0)**
 
 El presente proyecto consiste en el trabajo final de la materia de desarrollo de aplicaciones web, con la finalidad de demostrar los conocimientos adquiridos durante el curso. Se establece una arquitectura desacoplada con un backend en **Django (API REST)** y un frontend en **React**.
+Este proyecto es una aplicación web desacoplada para la gestión cinematográfica. Implementa un flujo completo de autenticación y operaciones CRUD, demostrando el uso de estados globales, interceptores y diseño profesional con Material UI.
 
 ## Objetivo
-Implementar un sistema completo de autenticación OAuth con Django, incluyendo login, logout y protección de rutas.
+Implementar un sistema robusto de gestión de catálogo con autenticación **OAuth 2.0**, garantizando la protección de rutas y la persistencia de datos mediante una API REST.
 
 ## Requisitos técnicos
 * **Autenticación OAuth con Django:** 
-Uso de tokens para proteger el acceso.
-* **Gestión de tokens:** 
-Almacenamiento de tokens de acceso en `localStorage`.
-* **Interceptores de Axios:** 
-Configuración para agregar tokens automáticamente a las peticiones.
+Flujo OAuth 2.0 con intercambio de tokens.
+* **Seguridad:** 
+Gestión de tokens en `localStorage` e interceptores de Axios para inyección automática en Headers (Bearer Token).
 * **Rutas protegidas:** 
 Uso de React Router para restringir acceso a usuarios no autenticados.
 * **Formularios:** 
 Creación y edición de Directores y Películas con validaciones.
+* **Arquitectura:** 
+Separación de responsabilidades en Servicios, Contextos y Componentes.
+* **UI/UX:** Interfaz responsiva con Material UI y temática espacial personalizada.
+* **Imágenes:** 
+Procesamiento y conversión de archivos a `Base64`.
 
-## Nuevas características
+## Otras características
 * **Página de login:** 
 Autenticación OAuth en la ruta `/login`.
 * **Gestión de Catálogo:** 
 Páginas para agregar y editar Directores y Películas.
 * **Sistema de logout:** 
 Revocación de token y limpieza de sesión.
-* **Protección de rutas:** 
-Seguridad basada en estado de autenticación.
-* **Conversión de imágenes:** 
-Procesamiento a base64 para envío al backend.
 * **Interceptores de Axios:** 
 Autorización centralizada.
 
 ## Estructura del Proyecto
 ```text
-src/
- ├── api/
- │    └── axiosConfig.js
- ├── pages/
- │    ├── Login.jsx
- │    ├── Directores.jsx
- │    ├── Peliculas.jsx
- ├── components/
- │    ├── Navbar.jsx
- │    ├── FormDirector.jsx
- │    ├── FormPelicula.jsx
- ├── services/
- │    ├── authService.js
- │    ├── directorService.js
- │    ├── peliculaService.js
- ├── App.jsx
- └── main.jsx
+    src
+    │   App.css
+    │   App.jsx
+    │   index.css
+    │   main.jsx
+    │
+    ├───api
+    │       axiosConfig.js
+    │
+    ├───assets
+    │       react.svg
+    │
+    ├───components
+    │       ConfirmDialog.jsx
+    │       DirectorForm.jsx
+    │       LoadingScreen.jsx
+    │       MovieForm.jsx
+    │       MovieList.jsx
+    │
+    ├───context
+    │       SnackbarContext.jsx
+    │
+    ├───pages
+    │       Directores.jsx
+    │       Login.jsx
+    │       Movies.jsx
+    │
+    ├───services
+    │       api.js
+    │       authService.js
+    │       directorService.js
+    │       movieService.js
+    │
+    └───utils
+           base64.js
+    
 
-## Instalación del proyecto
+## ⚙️ Instalación y Configuración
 
 Para configurar el entorno de desarrollo, abre la carpeta de tu repositorio en VS Code y ejecuta los siguientes comandos:
+
+### Prerrequisitos
+* 1. Tener el **Backend (Django)** en ejecución en `http://127.0.0.1:8000`.
+* Tener instalado **Node.js** (versión 18 o superior).
+
+### 2. Clonar e Instalar dependencias
+```bash
+# Clonar el repositorio
+git clone [URL_DE_TU_REPOSITORIO]
+
+# Entrar a la carpeta del proyecto
+cd cine-mundo-frontend
+
+### Comenzar instalación
 
     ### 1. Inicialización del proyecto (Vite)
 ```bash
 npm create vite@latest cine-mundo-frontend
 npm install @mui/icons-material
-
-cd cine-mundo-frontend
 
     ### 2. Instalar las dependencias base
 
