@@ -11,9 +11,7 @@ api.interceptors.request.use(
     
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log("✅ Token encontrado y pegado al Header");
-    } else {
-      console.error("❌ ERROR: No hay ningún token en LocalStorage");
+      
     }
     return config;
   },

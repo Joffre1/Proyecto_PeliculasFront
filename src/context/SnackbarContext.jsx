@@ -11,14 +11,10 @@ export function SnackbarProvider({ children }) {
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("success");
 
-  const showMessage = (msg, type = "success") => {
-    setMessage(msg);
-    setSeverity(type);
-    setOpen(true);
-  };
+  const showMessage = (msg, type = "success") => {setMessage(msg);setSeverity(type);setOpen(true);};
 
   const showSnackbar = showMessage;
-
+                       
   return (
     <SnackbarContext.Provider value={{ showMessage, showSnackbar }}>
 

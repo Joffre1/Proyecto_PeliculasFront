@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Login from "./pages/Login";
+import Directores from "./pages/Directores"; // Nueva importación
 import DirectorForm from "./components/DirectorForm";
 import MovieForm from "./components/MovieForm";
 import Movies from "./pages/Movies";
@@ -8,18 +9,14 @@ import { deleteDirector, deleteMovie } from "./services/api";
 import { useSnackbar } from "./Context/SnackbarContext";
 import api from "./api/axiosConfig";
 import MovieIcon from '@mui/icons-material/Movie';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import {
-  Container, Typography, Card, CardContent, CardMedia,
-  Button, Grid, AppBar, Toolbar, Box, Paper, Divider, Dialog,
-  createTheme, ThemeProvider, CssBaseline, GlobalStyles
+  Container, Typography, Button, AppBar, Toolbar, Box, Dialog,
+  createTheme, ThemeProvider, CssBaseline, GlobalStyles, CircularProgress
 } from "@mui/material";
 
 const StarryBackground = () => (
   <GlobalStyles styles={{
     "@keyframes move-twinkle": { from: { backgroundPosition: "0 0" }, to: { backgroundPosition: "-10000px 5000px" } },
-    "@keyframes spin": { from: { transform: "rotate(0deg)" }, to: { transform: "rotate(360deg)" } },
     ".stars-container": {
       position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
       width: "100%", height: "100%",
@@ -40,8 +37,16 @@ const starryTheme = createTheme({
 
 const LoadingScreen = () => (
   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', bgcolor: '#050A18' }}>
-    <MovieIcon sx={{ fontSize: 100, color: '#FFD700', animation: "spin 2s linear infinite" }} />
-    <Typography variant="h6" sx={{ mt: 2, color: '#FFD700', letterSpacing: 5 }}>VIAJANDO A LAS ESTRELLAS...</Typography>
+    <Box sx={{ position: 'relative', display: 'inline-flex', mb: 3 }}>
+      <CircularProgress size={100} thickness={2} sx={{ color: '#FFD700' }} />
+      <Box sx={{ top: 0, left: 0, bottom: 0, right: 0, position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <MovieIcon sx={{ 
+          fontSize: 40, color: '#FFD700', animation: "pulse 1.5s ease-in-out infinite",
+          "@keyframes pulse": { "0%": { transform: "scale(1)", opacity: 1 }, "50%": { transform: "scale(1.2)", opacity: 0.7 }, "100%": { transform: "scale(1)", opacity: 1 } }
+        }} />
+      </Box>
+    </Box>
+    <Typography variant="h6" sx={{ color: '#FFD700', letterSpacing: 5, fontWeight: 'bold' }}>VIAJANDO A LAS ESTRELLAS...</Typography>
   </Box>
 );
 
@@ -116,97 +121,25 @@ function App() {
 
         <Container maxWidth="lg" sx={{ mt: 6 }}>
           {tabActual === "directores" ? (
-            <Box>
-              <Typography variant="h3" sx={{ textAlign: 'center', mb: 4, fontWeight: 'bold', color: 'primary.main', textShadow: '0 0 15px #FFD700' }}>
-                🌟 LISTA DE DIRECTORES
-              </Typography>
-
-              {token && (
-                <Box sx={{ textAlign: 'center', mb: 6 }}>
-                  <Button variant="contained" size="large" onClick={() => setOpenDirectorModal(true)} sx={{ boxShadow: '0 0 15px #FFD700' }}>+ AÑADIR DIRECTOR</Button>
-                </Box>
-              )}
-
-              <Grid container spacing={5}>
-                {directores.map((director) => (
-                  <Grid item xs={12} key={director.id}>
-                    <Card sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
-                      {director.picture && (
-                        <CardMedia
-                          component="img"
-                          sx={{ width: { xs: '100%', md: 450 }, height: { xs: 400, md: 'auto' }, objectFit: 'cover' }}
-                          image={`http://127.0.0.1:8000/media/${director.picture}`}
-                        />
-                      )}
-                      <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, p: 4 }}>
-                        <Typography variant="h3" sx={{ fontWeight: '900', color: 'primary.main', mb: 1 }}>{director.name} {director.last_name}</Typography>
-                        <Typography variant="h6" sx={{ color: 'secondary.main', mb: 2 }}>{director.age} AÑOS | {director.birth}</Typography>
-                        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3, lineHeight: 1.7 }}>{director.biography}</Typography>
-
-                        {token && (
-                          <Box sx={{ display: 'flex', gap: 2, mb: 4 }}>
-                            <Button
-                              variant="contained" startIcon={<EditIcon />}
-                              sx={{ bgcolor: '#ff9800', boxShadow: '0 0 10px #ff9800', '&:hover': { bgcolor: '#e68a00' } }}
-                              onClick={() => { setDirectorSeleccionado(director); setOpenDirectorModal(true); }}
-                            >EDITAR PERFIL</Button>
-                            <Button
-                              variant="contained" color="error" startIcon={<DeleteIcon />}
-                              sx={{ boxShadow: '0 0 10px #f44336' }}
-                              onClick={() => confirmarEliminarDirector(director.id)}
-                            >BORRAR</Button>
-                          </Box>
-                        )}
-
-                        <Divider sx={{ my: 3, borderColor: 'rgba(255,215,0,0.2)' }} />
-                        <Typography variant="h6" sx={{ color: 'primary.main', mb: 2, fontSize: '1rem' }}>FILMOGRAFÍA:</Typography>
-
-                        <Grid container spacing={2}>
-                          {director.movies && director.movies.length > 0 ? (
-                            director.movies.map((movie) => (
-                              <Grid item xs={12} sm={6} key={movie.id}>
-                                <Paper sx={{ display: 'flex', bgcolor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden', borderRadius: 2 }}>
-                                  {movie.picture && (
-                                    <Box sx={{ width: 80, height: 100, flexShrink: 0 }}>
-                                      <img src={`http://127.0.0.1:8000/media/${movie.picture}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                    </Box>
-                                  )}
-                                  <Box sx={{ p: 2 }}>
-                                    <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{movie.title}</Typography>
-                                    <Typography variant="caption" sx={{ color: 'primary.main' }}>{movie.year}</Typography>
-                                  </Box>
-                                </Paper>
-                              </Grid>
-                            ))
-                          ) : (
-                            <Grid item xs={12}>
-                              <Box sx={{ p: 2, textAlign: 'center', border: '1px dashed rgba(255,215,0,0.3)', borderRadius: 2 }}>
-                                <Typography variant="body2" sx={{ color: 'primary.main', fontStyle: 'italic' }}>
-                                  ✨ Este director aún no ha registrado obras.
-                                </Typography>
-                              </Box>
-                            </Grid>
-                          )}
-                        </Grid>
-                      </Box>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
+            <Directores 
+              directores={directores}
+              token={token}
+              onEdit={(d) => { setDirectorSeleccionado(d); setOpenDirectorModal(true); }}
+              onDelete={confirmarEliminarDirector}
+              onAdd={() => setOpenDirectorModal(true)}
+            />
           ) : (
             <Movies
               directores={directores}
               token={token}
               onEdit={(m) => { setMovieSeleccionada(m); setOpenMovieModal(true); }}
-              onDelete={(id) => confirmarEliminarMovie(id)}
+              onDelete={confirmarEliminarMovie}
               onAdd={() => setOpenMovieModal(true)}
               recargar={cargarDirectores}
             />
           )}
         </Container>
       </Box>
-
 
       <Dialog open={openLoginModal} onClose={() => setOpenLoginModal(false)}><Login setToken={(t) => { setToken(t); setOpenLoginModal(false); }} /></Dialog>
       <Dialog open={openDirectorModal} onClose={() => { setOpenDirectorModal(false); setDirectorSeleccionado(null); }} fullWidth maxWidth="sm">

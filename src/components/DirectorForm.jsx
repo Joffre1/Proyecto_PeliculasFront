@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TextField, Button, Grid, Typography, Box, InputAdornment, Avatar } from "@mui/material";
-import { updateDirector, createDirector } from "../services/api"; // Asegúrate de que las rutas sean correctas
+import { updateDirector, createDirector } from "../services/api";
 import { convertirBase64 } from "../utils/base64";
 import PersonIcon from '@mui/icons-material/Person';
 import CakeIcon from '@mui/icons-material/Cake';
