@@ -94,7 +94,7 @@ Para configurar el entorno de desarrollo, abre la carpeta de tu repositorio en V
 
 ### Prerrequisitos
 1. Tener el **Backend (Django)** en ejecución en `http://127.0.0.1:8000`.
-2. Tener instalado **Node.js** (versión 18 o superior).
+2. Tener instalado **Node.js** (versión 18).
 
 3. Clonar el repositorio
 ```bash
