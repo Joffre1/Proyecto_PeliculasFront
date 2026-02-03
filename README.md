@@ -93,14 +93,13 @@ Autorización centralizada.
 Para configurar el entorno de desarrollo, abre la carpeta de tu repositorio en VS Code y ejecuta los siguientes comandos:
 
 ### Prerrequisitos
-* 1. Tener el **Backend (Django)** en ejecución en `http://127.0.0.1:8000`.
-* Tener instalado **Node.js** (versión 18 o superior).
+## 1. Tener el **Backend (Django)** en ejecución en `http://127.0.0.1:8000`.
+## 2. Tener instalado **Node.js** (versión 18 o superior).
 
-### 2. Clonar e Instalar dependencias
+## 3. Clonar el repositorio
 ```bash
-# Clonar el repositorio
 git clone [URL_DE_TU_REPOSITORIO]
-
+```
 # Entrar a la carpeta del proyecto
 cd cine-mundo-frontend
 
