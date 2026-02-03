@@ -113,9 +113,9 @@ npm install @mui/icons-material
 
 2. Instalar las dependencias base
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 3. Instalar Material UI y sus dependencias
 ```bash
@@ -131,28 +131,28 @@ npm install react-router-dom
 ```
 ### Comandos útiles
 - Ejecutar el servidor de desarrollo
-    ```bash
-    npm run dev
-    ```
+```bash
+npm run dev
+```
 - Comprobar versión de dependencias
-    ```bash
-    npm list
-    ```
+```bash
+npm list
+```
 - Limpiar dependencias
-    ```bash
-    rm -rf node_modules
-    npm install
-    ```
+```bash
+rm -rf node_modules
+npm install
+```
 
 ### Comandos git
 - Verificar los archivos modificados
-    ```bash
-    git status
-    ```
+```bash
+git status
+```
 - Agregar archivos al área de preparación
-    ```bash
-    git add .
-    ```
+```bash
+git add .
+```
 - Realizar un commit
  ```bash
 git commit -m "Escribe aquí la descripción de tus cambios"
