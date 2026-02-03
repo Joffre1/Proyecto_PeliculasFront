@@ -109,8 +109,9 @@ cd cine-mundo-frontend
 ```bash
 npm create vite@latest cine-mundo-frontend
 npm install @mui/icons-material
+```
 
-    ### 2. Instalar las dependencias base
+### 2. Instalar las dependencias base
 
    ```bash
    npm install
