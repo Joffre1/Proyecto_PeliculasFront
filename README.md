@@ -103,9 +103,9 @@ git clone [URL_DE_TU_REPOSITORIO]
 ### Entrar a la carpeta del proyecto
 cd cine-mundo-frontend
 
-### Comenzar instalación
+## Comenzar instalación
 
-    ### 1. Inicialización del proyecto (Vite)
+### 1. Inicialización del proyecto (Vite)
 ```bash
 npm create vite@latest cine-mundo-frontend
 npm install @mui/icons-material
